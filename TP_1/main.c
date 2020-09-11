@@ -26,7 +26,8 @@ int main() {
 	float resultadoSuma;
 	float resultadoMultiplicacion;
     float resultadoDivision;
-    unsigned long long int factorial;
+    unsigned long long int factorialPrimerOperando;
+    unsigned long long int factorialSegundoOperando;
 	int banderaPrimerOperando;
 	int banderaSegundoOperando;
 	int banderaCalculos;
@@ -71,11 +72,12 @@ int main() {
 				resultadoResta = Resta(primerOperando, segundoOperando, banderaPrimerOperando, banderaSegundoOperando);
 				resultadoMultiplicacion = Multiplicacion(primerOperando, segundoOperando, banderaPrimerOperando, banderaSegundoOperando);
 				resultadoDivision = Division(primerOperando, segundoOperando, banderaPrimerOperando, banderaSegundoOperando);
-				factorial = Factorial(primerOperando, banderaPrimerOperando, banderaSegundoOperando);
+				factorialPrimerOperando = Factorial(primerOperando, banderaPrimerOperando, banderaSegundoOperando);
+				factorialSegundoOperando = Factorial(segundoOperando, banderaPrimerOperando, banderaSegundoOperando);
 				banderaCalculos = ActivarBandera(banderaPrimerOperando, banderaSegundoOperando);
 				break;
 			case 4:
-			    MostrarResultados(resultadoSuma, resultadoResta, resultadoMultiplicacion, resultadoDivision, factorial, banderaCalculos, segundoOperando);
+			    MostrarResultados(resultadoSuma, resultadoResta, resultadoMultiplicacion, resultadoDivision, factorialPrimerOperando, factorialSegundoOperando, banderaCalculos, segundoOperando);
 				break;
 			case 0:
 				printf("Gracias por usar el programa, Apriete enter para continuar");

@@ -6,7 +6,7 @@
 	<string.h>
 	<ctype.h>
 
-1599804186 c:\users\federico\desktop\archivos varios\programacion\tp_laboratorio_1\tp_1\entradaysalida.h
+1599850754 c:\users\federico\desktop\archivos varios\programacion\tp_laboratorio_1\tp_1\entradaysalida.h
 
 1599804236 source:c:\users\federico\desktop\archivos varios\programacion\tp_laboratorio_1\tp_1\operacionesaritmeticas.c
 	<stdio.h>
@@ -16,7 +16,7 @@
 
 1599799200 c:\users\federico\desktop\archivos varios\programacion\tp_laboratorio_1\tp_1\operacionesaritmeticas.h
 
-1599801743 source:c:\users\federico\desktop\archivos varios\programacion\tp_laboratorio_1\tp_1\main.c
+1599850743 source:c:\users\federico\desktop\archivos varios\programacion\tp_laboratorio_1\tp_1\main.c
 	<stdio.h>
 	<stdlib.h>
 	"EntradaySalida.h"

@@ -83,14 +83,15 @@ void MostrarNumeroFlotante(float numero, char mensaje[]);
  * \param resta: resultado de la resta a mostrarse
  * \param multiplicacion: resultado de la multiplicacion a mostrarse
  * \param division: resultado de la division a mostrarse
- * \param factorial: resultado del factorial a mostrarse
+ * \param factorialPrimero: resultado del factorial del primer operando a mostrarse
+ * \param factorialSegundo: resultado del factorial del segundo operando a mostrarse
  * \param banderaCalculos: bandera que verifica que se hallan realizado los calculos
  * \param denominador: el denominador de la division
  * \return void
  *
  */
 
-void MostrarResultados(float suma, float resta, float multiplicacion, float division, unsigned long long int factorial, int banderaCalculos, int denominador);
+void MostrarResultados(float suma, float resta, float multiplicacion, float division, unsigned long long int factorialPrimero, unsigned long long int factorialSegundo, int banderaCalculos, int denominador);
 
 /** \brief si las primeras dos banderas estan activadas devuelve uno sino 0
  *

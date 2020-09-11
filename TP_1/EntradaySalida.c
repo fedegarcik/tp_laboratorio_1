@@ -104,13 +104,13 @@ void MostrarNumeroFlotante(float numero, char mensaje[])
     printf("%s %.2f \n", mensaje, numero);
 }
 
-void MostrarResultados(float suma, float resta, float multiplicacion, float division,unsigned long long int factorial, int banderaCalculos, int denominador)
+void MostrarResultados(float suma, float resta, float multiplicacion, float division,unsigned long long int factorialPrimero, unsigned long long int factorialSegundo, int banderaCalculos, int denominador)
 {
     if(banderaCalculos)
     {
-        MostrarNumeroFlotante(suma, "El resultado de la suma es :");
-        MostrarNumeroFlotante(resta, "El resultado de la resta es :");
-        MostrarNumeroFlotante(multiplicacion, "El resultado de la multiplicacion es :");
+        MostrarNumeroFlotante(suma, "El resultado de la suma de A + B es :");
+        MostrarNumeroFlotante(resta, "El resultado de la resta A - B es :");
+        MostrarNumeroFlotante(multiplicacion, "El resultado de la multiplicacion  de A * B es :");
 
 
         if(denominador == 0)
@@ -119,17 +119,26 @@ void MostrarResultados(float suma, float resta, float multiplicacion, float divi
         }
         else
         {
-            MostrarNumeroFlotante(division, "El resultado de la division es :");
+            MostrarNumeroFlotante(division, "El resultado de la division de A / B es :");
         }
 
 
-        if(factorial == 0)
+        if(factorialPrimero == 0)
         {
             printf("No se pudo sacar el factorial porque es un numero negativo o es mayor a 20 y este programa no soporta factoriales mayores a 20\n");
         }
         else
         {
-             MostrarNumeroLongLong(factorial, "El factorial de A es :");
+             MostrarNumeroLongLong(factorialPrimero, "El factorial de A es :");
+        }
+
+        if(factorialSegundo == 0)
+        {
+            printf("No se pudo sacar el factorial porque es un numero negativo o es mayor a 20 y este programa no soporta factoriales mayores a 20\n");
+        }
+        else
+        {
+             MostrarNumeroLongLong(factorialSegundo, "El factorial de B es :");
         }
         printf("Apriete enter para continuar: ");
         AprieteEnter();
