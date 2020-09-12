@@ -1,22 +1,22 @@
 # depslib dependency file v1.0
-1599804186 source:c:\users\federico\desktop\archivos varios\programacion\tp_laboratorio_1\tp_1\entradaysalida.c
+1599919226 source:c:\users\federico\desktop\archivos varios\programacion\tp_laboratorio_1\tp_1\entradaysalida.c
 	<stdio.h>
 	<stdlib.h>
 	"EntradaySalida.h"
 	<string.h>
 	<ctype.h>
 
-1599850754 c:\users\federico\desktop\archivos varios\programacion\tp_laboratorio_1\tp_1\entradaysalida.h
+1599917695 c:\users\federico\desktop\archivos varios\programacion\tp_laboratorio_1\tp_1\entradaysalida.h
 
-1599804236 source:c:\users\federico\desktop\archivos varios\programacion\tp_laboratorio_1\tp_1\operacionesaritmeticas.c
+1599919148 source:c:\users\federico\desktop\archivos varios\programacion\tp_laboratorio_1\tp_1\operacionesaritmeticas.c
 	<stdio.h>
 	<stdlib.h>
 	"OperacionesAritmeticas.h"
 	"EntradaySalida.h"
 
-1599799200 c:\users\federico\desktop\archivos varios\programacion\tp_laboratorio_1\tp_1\operacionesaritmeticas.h
+1599919384 c:\users\federico\desktop\archivos varios\programacion\tp_laboratorio_1\tp_1\operacionesaritmeticas.h
 
-1599850743 source:c:\users\federico\desktop\archivos varios\programacion\tp_laboratorio_1\tp_1\main.c
+1599918862 source:c:\users\federico\desktop\archivos varios\programacion\tp_laboratorio_1\tp_1\main.c
 	<stdio.h>
 	<stdlib.h>
 	"EntradaySalida.h"

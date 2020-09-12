@@ -16,49 +16,49 @@
  *
  * @param numeroUno primer operando
  * @param numeroDos segundo operando
- * @param banderaUno bandera del primer operando
- * @param banderaDos bandera del segundo operando
- * @return resultado de la suma o mensaje de error en caso de no poder sumar
+ * @return resultado de la suma
  */
 
-float Suma(float numeroUno, float numeroDos, int banderaUno, int BanderaDos);
+float Suma(float numeroUno, float numeroDos);
 
-/** \brief se fija que se hallan ingresado los operando y si es asi los resta y devuelve el resultado
+/** \brief resta los dos operando y devuelve el resultado
  *
  * \param numeroUno primer operando
  * \param numeroDos segundo operando
- * \param banderaUno primer bandera a verificar
- * \param banderaDos segunda bandera a verificar
- * \return resultado de la resta o 0 si no puede restar
+ * \return resultado de la resta
  *
  */
 
-float Resta(float numeroUno, float numeroDos, int banderaUno, int BanderaDos);
+float Resta(float numeroUno, float numeroDos);
 
-/** \brief verifica que se hallan ingresado los operando de ser asi los multiplica y devuelve el resultado
+/** \brief multiplica los dos operando y devuelve el resultado
  *
  * \param numeroUno: primer operando
  * \param numeroDos: segundo operando
- * \param banderaUno: bandera que verifica que se halla ingresado el primer operando
- * \param banderaDos: bandera que verifica que se halla ingresado el segundo operando
  * \return el resultado de la multiplicacion
  *
  */
 
 
-float Multiplicacion(float numeroUno, float numeroDos, int banderaUno, int banderaDos);
+float Multiplicacion(float numeroUno, float numeroDos);
 
-/** \brief verifica que se hallan ingresado los operando de ser asi los multiplica y devuelve el resultado
+/** \brief divide los dos operando y devuelve el resultado
  *
  * \param numeroUno: primer operando
  * \param numeroDos: segundo operando
- * \param banderaUno: bandera que verifica que se halla ingresado el primer operando
- * \param banderaDos: bandera que verifica que se halla ingresado el segundo operando
  * \return el resultado de la division y si divide por cero retorna 0
  *
  */
 
 
-float Division(float numeroUno, float numeroDos, int banderaUno, int banderaDos);
+float Division(float numeroUno, float numeroDos);
 
-unsigned long long int Factorial(unsigned long long int numero , int banderaUno, int banderaDos);
+/** \brief saca el factorial del numero que recibe como parametro a menos que sea negativo o mayor a 20 o flotante
+ *
+ * \param numero: numero del cual se va a sacar el factorial
+ * \return el factorial del numero o 0 si no se pudo calcular el factorial
+ *
+ */
+
+
+unsigned long long int Factorial(float numero);
