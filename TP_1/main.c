@@ -61,13 +61,13 @@ int main() {
 
 		{
 		    case '1':
-			    IngresarDatoCadenaCaracteres(primerOperandoAux, "Ingrese el primer operando y luego apriete enter para continuar:  ", CANTIDAD);
-			    primerOperando = ValidarNumeroFlotante(primerOperandoAux, CANTIDAD);
+			    IngresarDatoCadenaCaracteres(primerOperandoAux, "Ingrese el primer operando y luego apriete enter para continuar:  ");
+			    primerOperando = ValidarNumeroFlotante(primerOperandoAux);
 			    banderaPrimerOperando = BANDERA_ARRIBA;
 				break;
 			case '2':
-				IngresarDatoCadenaCaracteres(segundoOperandoAux, "Ingrese el segundo operando luego apriete enter para continuar:  ", CANTIDAD);
-				segundoOperando = ValidarNumeroFlotante(segundoOperandoAux, CANTIDAD);
+				IngresarDatoCadenaCaracteres(segundoOperandoAux, "Ingrese el segundo operando luego apriete enter para continuar:  ");
+				segundoOperando = ValidarNumeroFlotante(segundoOperandoAux);
 				banderaSegundoOperando = BANDERA_ARRIBA;
 				break;
 			case '3':

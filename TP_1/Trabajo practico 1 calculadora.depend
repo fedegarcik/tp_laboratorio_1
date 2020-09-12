@@ -1,12 +1,12 @@
 # depslib dependency file v1.0
-1599919226 source:c:\users\federico\desktop\archivos varios\programacion\tp_laboratorio_1\tp_1\entradaysalida.c
+1599947546 source:c:\users\federico\desktop\archivos varios\programacion\tp_laboratorio_1\tp_1\entradaysalida.c
 	<stdio.h>
 	<stdlib.h>
 	"EntradaySalida.h"
 	<string.h>
 	<ctype.h>
 
-1599917695 c:\users\federico\desktop\archivos varios\programacion\tp_laboratorio_1\tp_1\entradaysalida.h
+1599947546 c:\users\federico\desktop\archivos varios\programacion\tp_laboratorio_1\tp_1\entradaysalida.h
 
 1599919148 source:c:\users\federico\desktop\archivos varios\programacion\tp_laboratorio_1\tp_1\operacionesaritmeticas.c
 	<stdio.h>

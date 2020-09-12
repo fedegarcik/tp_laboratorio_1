@@ -16,10 +16,9 @@
  *
  * @param input: array de caracteres donde se ingresara la cadena
  * @param mensaje: array de caracteres que contiene mensaje a mostrar
- * @param cantidad: cantidad de elementos que puede almacenar el array
  */
 
-void IngresarDatoCadenaCaracteres(char input[], char mensaje[], int cantidad);
+void IngresarDatoCadenaCaracteres(char input[], char mensaje[]);
 
 /**brief valida que una cadena sea un numero y  la devuelve cuando sea un numero
  *
@@ -27,12 +26,11 @@ void IngresarDatoCadenaCaracteres(char input[], char mensaje[], int cantidad);
  * @return numero: validado
  */
 
-float ValidarNumeroFlotante(char numero[], int cantidad);
+float ValidarNumeroFlotante(char numero[]);
 
 /**
  * @fn int ValidarFlotante(float)
  * @brief Valida que el numero sea flotante
- * @param cantidad: cantidad de elementos que puede almacenar el array
  * @param numero: numero a validar
  * @return El numero como flotante
  */

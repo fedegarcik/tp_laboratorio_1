@@ -11,14 +11,14 @@
 #include <string.h>
 #include <ctype.h>
 
-void IngresarDatoCadenaCaracteres(char input[], char mensaje[], int cantidad)
+void IngresarDatoCadenaCaracteres(char input[], char mensaje[])
 {
 	printf("%s\n", mensaje);
     fflush(stdin);
     gets(input);
 }
 
-float ValidarNumeroFlotante(char numero[], int cantidad)
+float ValidarNumeroFlotante(char numero[])
 {
     float numAux;
     int flagNum = 1;
@@ -42,7 +42,7 @@ float ValidarNumeroFlotante(char numero[], int cantidad)
         if(numAux == 0)
         {
             printf("ERROR: ese no es un numero reingrese: \n");
-            IngresarDatoCadenaCaracteres(numero, "", cantidad);
+            IngresarDatoCadenaCaracteres(numero, "");
 
             numAux = atof(numero);
         }
