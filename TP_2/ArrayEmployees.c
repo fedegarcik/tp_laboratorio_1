@@ -234,6 +234,13 @@ void InicializarId(eEmployee empleados[], int capacidad)
 void MostrarEmpleados(eEmployee empleados[], int capacidad)
 {
     int i;
+
+    printf("Nombre   ");
+    printf("Apellido  ");
+    printf("id   ");
+    printf("Salario  ");
+    printf("Sector  \n");
+
     //Recorro el array de empleados mostrando los datos de cada empleado con formato
     for(i = 0; i< capacidad; i++)
     {
@@ -267,6 +274,7 @@ int BuscarPorId(eEmployee empleados[], int capacidad)
     printf("ingrese el id del empleado a buscar: \n");
     scanf("%d", &idBusqueda);
 
+
     //Bucle for que reccore todo el array de empleados en busca de una coincidencia del id ingresado
     for(i = 0; i<capacidad; i++)
     {
@@ -280,6 +288,11 @@ int BuscarPorId(eEmployee empleados[], int capacidad)
             se supone que justifica en vez de a la derecha hacia la izquierda asi que se toma como solucion
             */
             printf("El empleado encontrado es: \n");
+            printf("Nombre   ");
+            printf("Apellido  ");
+            printf("id   ");
+            printf("Salario  ");
+            printf("Sector  \n");
             printf("%-10s", empleados[i].name);
             printf("%-10s", empleados[i].lastName);
             printf("%-5d", empleados[i].id);
@@ -441,23 +454,32 @@ int SacarSalarios(eEmployee empleados[], int capacidad)
     printf("Los empleados que superan el salario minimo son:\n");
 
 
+    printf("Nombre   ");
+    printf("Apellido  ");
+    printf("id   ");
+    printf("Salario  ");
+    printf("Sector  \n");
     for(i = 0; i< capacidad; i++)
     {
-        if(empleados[i].salary > salarioPromedio)
+        if(empleados[i].isEmpty == 1)
         {
-            printf("%-10s", empleados[i].name);
-            printf("%-10s", empleados[i].lastName);
-            printf("%-5d", empleados[i].id);
-            printf("%-10.2f", empleados[i].salary);
-            printf("%-5d\n", empleados[i].sector);
-            banderaPromedio = 1;
+            if(empleados[i].salary > salarioPromedio)
+            {
+                printf("%-10s", empleados[i].name);
+                printf("%-10s", empleados[i].lastName);
+                printf("%-5d", empleados[i].id);
+                printf("%-10.2f", empleados[i].salary);
+                printf("%-5d\n", empleados[i].sector);
+                banderaPromedio = 1;
+            }
+
         }
     }
+
     if(banderaPromedio == 0)
     {
-        printf("No se encontro ningun empleado que superara el salario promedio");
+        printf("No se encontro ningun empleado que superara el salario promedio\n");
     }
-
     return banderaPromedio;
 }
 
@@ -471,6 +493,11 @@ void ModificarEmpleado(eEmployee empleados[], int capacidad, int id)
         if(empleados[i].id == id)
         {
             printf("Empleado a modificar:  \n");
+            printf("Nombre   ");
+            printf("Apellido  ");
+            printf("id   ");
+            printf("Salario  ");
+            printf("Sector  \n");
             printf("%-10s", empleados[i].name);
             printf("%-10s", empleados[i].lastName);
             printf("%-5d", empleados[i].id);
