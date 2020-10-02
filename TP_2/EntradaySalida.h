@@ -101,3 +101,13 @@ void MostrarNumeroFlotante(float numero, char mensaje[]);
 
 void MostrarResultados(float suma, float resta, float multiplicacion, float division, unsigned long long int factorialPrimero, unsigned long long int factorialSegundo, int denominador);
 
+
+/** \brief Muestra un mensaje personalizado y pide un numero
+ *
+ * \param char[]: mensaje personalizado a mostrarse
+ * \return devuelve el numero el cual se ingreso
+ *
+ */
+
+
+int IngresarNumeroEntero(char[]);

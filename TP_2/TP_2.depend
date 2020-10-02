@@ -1,20 +1,20 @@
 # depslib dependency file v1.0
-1601403750 source:c:\users\federico\desktop\archivos varios\programacion\tp_laboratorio_1\tp_2\entradaysalida.c
+1601647239 source:c:\users\federico\desktop\archivos varios\programacion\tp_laboratorio_1\tp_2\entradaysalida.c
 	<stdio.h>
 	<stdlib.h>
 	"EntradaySalida.h"
 	<string.h>
 	<ctype.h>
 
-1601403750 c:\users\federico\desktop\archivos varios\programacion\tp_laboratorio_1\tp_2\entradaysalida.h
+1601632356 c:\users\federico\desktop\archivos varios\programacion\tp_laboratorio_1\tp_2\entradaysalida.h
 
-1601620814 source:c:\users\federico\desktop\archivos varios\programacion\tp_laboratorio_1\tp_2\main.c
+1601646680 source:c:\users\federico\desktop\archivos varios\programacion\tp_laboratorio_1\tp_2\main.c
 	<stdio.h>
 	<stdlib.h>
 	"EntradaySalida.h"
 	"ArrayEmployees.h"
 
-1601619965 c:\users\federico\desktop\archivos varios\programacion\tp_laboratorio_1\tp_2\arrayemployees.h
+1601647036 c:\users\federico\desktop\archivos varios\programacion\tp_laboratorio_1\tp_2\arrayemployees.h
 
 1601253954 source:c:\users\federico\desktop\archivos varios\programacion\tp_laboratorio_1\tp_2\arrayemplyees.c
 	<stdio.h>
@@ -22,10 +22,11 @@
 	"EntradaySalida.h"
 	"ArrayEmployees.h"
 
-1601620756 source:c:\users\federico\desktop\archivos varios\programacion\tp_laboratorio_1\tp_2\arrayemployees.c
+1601646890 source:c:\users\federico\desktop\archivos varios\programacion\tp_laboratorio_1\tp_2\arrayemployees.c
 	<stdio.h>
 	<stdlib.h>
 	<ctype.h>
+	<string.h>
 	"EntradaySalida.h"
 	"ArrayEmployees.h"
 

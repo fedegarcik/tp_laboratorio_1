@@ -1,19 +1,27 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <ctype.h>
+#include <string.h>
 #include "EntradaySalida.h"
 #include "ArrayEmployees.h"
 
 
 
-void Menu()
+void Menu(eEmployee empleados[])
 {
     char subOpcion;
     char opcionAux[TAMANIO_ARRAYS];
     int opcion;
+    int banderaInicializacion;
+    int indice;
+    int id;
+
+    banderaInicializacion = 0;
 
     do
     {
+
+
         //Limpio la pantalla
         system("cls");
 
@@ -22,6 +30,7 @@ void Menu()
         printf("2_Modificar empleado\n");
         printf("3_Dar de baja empleado\n");
         printf("4_Informar\n");
+        printf("5_Salir\n");
 
         //Ingreso la opcion y valido que sea un numero
         IngresarDatoCadenaCaracteres(opcionAux, "Ingrese una opcion por favor: \n");
@@ -30,50 +39,89 @@ void Menu()
         switch(opcion)
         {
             case 1:
+                if(banderaInicializacion == 0)
+                {
+                    InicializarId(empleados, CANTIDAD_EMPLEADOS);
+                    initEmployees(empleados, CANTIDAD_EMPLEADOS);
+                    banderaInicializacion = 1;
+                }
+                indice = ObtenerEspacioLibre(empleados, CANTIDAD_EMPLEADOS);
+                CargarEmpleado(empleados, indice, CANTIDAD_EMPLEADOS);
                 AprieteEnter();
                 break;
             case 2:
-                AprieteEnter();
+                if(banderaInicializacion == 0)
+                {
+                    printf("ERROR NECESITA CARGAR EMPLEADOS\n");
+                    AprieteEnter();
+                }
+                else
+                {
+                    id = BuscarPorId(empleados, CANTIDAD_EMPLEADOS);
+                    ModificarEmpleado(empleados, CANTIDAD_EMPLEADOS, id);
+                }
                 break;
             case 3:
-                AprieteEnter();
+                if(banderaInicializacion == 0)
+                {
+                    printf("ERROR NECESITA CARGAR EMPLEADOS\n");
+                    AprieteEnter();
+                }
+                else
+                {
+                    id = BuscarPorId(empleados, CANTIDAD_EMPLEADOS);
+                    RemoverEmpleado(empleados, CANTIDAD_EMPLEADOS, id);
+                    AprieteEnter();
+                }
                 break;
             case 4:
-                //Sub menu para elegir de que manera listar los empleados
-                printf("A_listar por nombre y salario\n");
-                printf("B_listar por promedio salarial\n");
-
-                printf("Ingrese una opcion por favor: \n");
-                fflush(stdin);
-                scanf("%c", &subOpcion);
-
-                subOpcion = toupper(subOpcion);
-
-                switch(subOpcion)
+                if(banderaInicializacion == 0)
                 {
-                    case 'A':
-                        printf("a");
-                        AprieteEnter();
-                        break;
-                    case 'B':
-                        printf("b");
-                        AprieteEnter();
-                        break;
-                    //Caso en el que no se ingresa opcion valida
-                    default:
-                        printf("ERROR eso no es una opcion valida\n");
-                        AprieteEnter();
-                        break;
+                    printf("ERROR NECESITA CARGAR EMPLEADOS\n");
+                    AprieteEnter();
+                }
+                else
+                {
+                    //Sub menu para elegir de que manera listar los empleados
+                    printf("A_listar por nombre y salario\n");
+                    printf("B_listar por promedio salarial\n");
+
+                    printf("Ingrese una opcion por favor: \n");
+                    fflush(stdin);
+                    scanf("%c", &subOpcion);
+
+                    subOpcion = toupper(subOpcion);
+
+                    switch(subOpcion)
+                    {
+                        case 'A':
+                            ordenarEmpleados(empleados, CANTIDAD_EMPLEADOS, 1);
+                            MostrarEmpleados(empleados, CANTIDAD_EMPLEADOS);
+                            AprieteEnter();
+                            break;
+                        case 'B':
+                            SacarSalarios(empleados, CANTIDAD_EMPLEADOS);
+                            AprieteEnter();
+                            break;
+                        //Caso en el que no se ingresa opcion valida
+                        default:
+                            printf("ERROR eso no es una opcion valida\n");
+                            AprieteEnter();
+                            break;
+                    }
                 }
                 break;
             //Caso en el que no se ingresa una opcion valida
-            default:
-                printf("ERROR esa no es una opcion valida:");
+            case 5:
+                printf("Gracias por usar el programa!\n");
                 AprieteEnter();
                 break;
+            default:
+            printf("error");
+            printf("ERROR esa no es una opcion valida:");
+            AprieteEnter();
+            break;
         }
-
-
     }while(opcion != 5);
 }
 
@@ -253,13 +301,17 @@ int BuscarPorId(eEmployee empleados[], int capacidad)
     return retorno;
 }
 
-void HardcodearDatos(eEmployee empleados[], int capacidad)
+int HardcodearDatos(eEmployee empleados[], int capacidad)
 {
+    int retorno;
+
+    retorno = 0;
+
     //Se hardcodean los datos
     int i;
     int id[3] = {1,2,3};
-    char nombre [3][30] = {"fede","german","octavio"};
-    char apellido [3][30] = {"garcik","scarafilo","villegas"};
+    char nombre [3][30] = {"eduardo","fede","alejandro"};
+    char apellido [3][30] = {"garcik","kluivoort","gomez"};
     int salario[3] = {3000,4000,5000};
     int sector[3] = {01,02,03};
     int isEmpty[3] = {1,1,1};
@@ -268,11 +320,198 @@ void HardcodearDatos(eEmployee empleados[], int capacidad)
     for(i=0; i < capacidad; i++)
     {
         empleados[i].id      = id[i];
-        empleados[i].salary     = salario[i];
+        empleados[i].salary  = salario[i];
         empleados[i].sector  = sector[i];
         empleados[i].isEmpty = isEmpty[i];
         strcpy(empleados[i].name, nombre[i]);
         strcpy(empleados[i].lastName,apellido[i]);
 
+        //Condicion que evalua si se pudo hardcodear  los datos
+        if(empleados[i].id                            == id[i]      &&
+           strcmp(empleados[i].name,nombre[i])        == 0          &&
+           strcmp(empleados[i].lastName, apellido[i]) == 0          &&
+           empleados[i].salary                        == salario[i] &&
+           empleados[i].sector                        == sector[i]  &&
+           empleados[i].isEmpty                       == isEmpty[i])
+
+        {
+            retorno = 1;
+        }
+
     }
+
+    return retorno;
+}
+
+
+int RemoverEmpleado(eEmployee empleados[], int capacidad, int id)
+{
+    int i;
+    int confirmacion;
+    int retorno;
+
+    retorno = 0;
+
+    for(i=0; i< capacidad; i++)
+    {
+        if(id == empleados[i].id)
+        {
+            confirmacion = IngresarNumeroEntero("Esta seguro que desea borrar al empleado? 1 para si 0 para no");
+            while(confirmacion != 0 &&
+                  confirmacion != 1)
+            {
+                confirmacion = IngresarNumeroEntero("ERROR NUMERO NO VALIDO 1 para si 0 para no");
+            }
+            empleados[i].isEmpty = 0;
+            retorno = 1;
+        }
+    }
+
+    return retorno;
+}
+
+int ordenarEmpleados(eEmployee empleados[], int capacidad, int orden)
+{
+    eEmployee empleadoAux;
+    int i;
+    int j;
+    int retorno;
+
+    retorno = 0;
+
+    for(i=0; i<capacidad; i++)
+    {
+
+        for(j = i+1; j<capacidad; j++)
+        {
+
+            if(orden == 0)
+            {
+                if(strcmp(empleados[i].name, empleados[j].name) > 0)
+                empleadoAux  = empleados[i];
+                empleados[i] = empleados[j];
+                empleados[j] = empleadoAux;
+                retorno = 1;
+            }
+            else
+            {
+                if(orden == 1)
+                {
+                    if(strcmp(empleados[i].name, empleados[j].name) < 0)
+                    {
+                        empleadoAux  = empleados[i];
+                        empleados[i] = empleados[j];
+                        empleados[j] = empleadoAux;
+                        retorno = 1;
+                    }
+                }
+            }
+        }
+    }
+
+
+    return retorno;
+}
+
+int SacarSalarios(eEmployee empleados[], int capacidad)
+{
+    int i;
+    int salarioTotal;
+    int contadorSalarios;
+    float salarioPromedio;
+    int banderaPromedio;
+
+    banderaPromedio = 0;
+    contadorSalarios =0;
+    salarioTotal = 0;
+
+    for(i=0; i < capacidad; i++)
+    {
+        if(empleados[i].isEmpty == 1)
+        {
+            salarioTotal += empleados[i].salary;
+            contadorSalarios++;
+        }
+    }
+
+    salarioPromedio = (float)salarioTotal/contadorSalarios;
+
+    printf("El salario total de los empleados es de %d\n", salarioTotal);
+    printf("El salario promedio de los empleados es de %.2f\n", salarioPromedio);
+    printf("Los empleados que superan el salario minimo son:\n");
+
+
+    for(i = 0; i< capacidad; i++)
+    {
+        if(empleados[i].salary > salarioPromedio)
+        {
+            printf("%-10s", empleados[i].name);
+            printf("%-10s", empleados[i].lastName);
+            printf("%-5d", empleados[i].id);
+            printf("%-10.2f", empleados[i].salary);
+            printf("%-5d\n", empleados[i].sector);
+            banderaPromedio = 1;
+        }
+    }
+    if(banderaPromedio == 0)
+    {
+        printf("No se encontro ningun empleado que superara el salario promedio");
+    }
+
+    return banderaPromedio;
+}
+
+void ModificarEmpleado(eEmployee empleados[], int capacidad, int id)
+{
+    int i;
+    int opcion;
+    char opcionAux[TAMANIO_ARRAYS];
+    for(i=0; i<capacidad; i++)
+    {
+        if(empleados[i].id == id)
+        {
+            printf("Empleado a modificar:  \n");
+            printf("%-10s", empleados[i].name);
+            printf("%-10s", empleados[i].lastName);
+            printf("%-5d", empleados[i].id);
+            printf("%-10.2f", empleados[i].salary);
+            printf("%-5d\n", empleados[i].sector);
+            printf("*****************************************************");
+            printf("1_Modificar nombre\n");
+            printf("2_Modificar apellido\n");
+            printf("3_Modificar sueldo\n");
+            printf("4_modificar sector\n");
+
+            //Ingreso la opcion y valido que sea un numero
+            IngresarDatoCadenaCaracteres(opcionAux, "Ingrese una opcion por favor: \n");
+            opcion = ValidarNumeroEntero(opcionAux);
+
+            switch(opcion)
+            {
+                case 1:
+                    printf("Ingrese nombre\n");
+                    fflush(stdin);
+                    gets(empleados[i].name);
+                    break;
+                case 2:
+                    printf("Ingrese apellido por favor\n");
+                    fflush(stdin);
+                    gets(empleados[i].lastName);
+                    break;
+                case 3:
+                    printf("Ingrese el salario por favor\n");
+                    scanf("%f", &empleados[i].salary);
+                    break;
+                case 4:
+                    printf("Ingrese el sector por favor\n");
+                    scanf("%d", &empleados[i].sector);
+                    break;
+            }
+        }
+    }
+    printf("Modifcaciones realizadas correctamente\n");
+    AprieteEnter();
+
+
+
 }

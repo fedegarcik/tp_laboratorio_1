@@ -132,6 +132,7 @@ void MostrarNumeroEntero(int numero, char mensaje[])
 void AprieteEnter()
 {
     char enter;
+    printf("Apriete enter para continuar\n");
     fflush(stdin);
     scanf("%c", &enter);
 }
@@ -189,3 +190,12 @@ void MostrarNumeroLongLong(unsigned long long int numero, char mensaje[])
     printf("%s %I64u ,\n", mensaje, numero);
 }
 
+int IngresarNumeroEntero(char mensaje[])
+{
+    int retorno;
+
+    printf("%s", mensaje);
+    scanf("%d", &retorno);
+
+    return retorno;
+}
