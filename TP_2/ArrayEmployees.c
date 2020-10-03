@@ -14,7 +14,7 @@ void Menu(eEmployee empleados[])
     int opcion;
     int banderaInicializacion;
     int indice;
-    int id;
+    int indiceId;
 
     banderaInicializacion = 0;
 
@@ -57,8 +57,16 @@ void Menu(eEmployee empleados[])
                 }
                 else
                 {
-                    id = BuscarPorId(empleados, CANTIDAD_EMPLEADOS);
-                    ModificarEmpleado(empleados, CANTIDAD_EMPLEADOS, id);
+                    indiceId = BuscarPorId(empleados, CANTIDAD_EMPLEADOS);
+                    if(indiceId == -1)
+                    {
+                        printf("ERROR, no se encontro el id");
+                        AprieteEnter();
+                    }
+                    else
+                    {
+                        ModificarEmpleado(empleados, CANTIDAD_EMPLEADOS, indiceId);
+                    }
                 }
                 break;
             case 3:
@@ -69,9 +77,17 @@ void Menu(eEmployee empleados[])
                 }
                 else
                 {
-                    id = BuscarPorId(empleados, CANTIDAD_EMPLEADOS);
-                    RemoverEmpleado(empleados, CANTIDAD_EMPLEADOS, id);
-                    AprieteEnter();
+                    indiceId = BuscarPorId(empleados, CANTIDAD_EMPLEADOS);
+                    if(indiceId == -1)
+                    {
+
+                        AprieteEnter();
+                    }
+                    else
+                    {
+                        RemoverEmpleado(empleados, CANTIDAD_EMPLEADOS, indiceId);
+                        AprieteEnter();
+                    }
                 }
                 break;
             case 4:
@@ -84,7 +100,7 @@ void Menu(eEmployee empleados[])
                 {
                     //Sub menu para elegir de que manera listar los empleados
                     printf("A_listar por nombre y salario\n");
-                    printf("B_listar por promedio salarial\n");
+                    printf("B_Mostrar promedio salarial y salario total\n");
 
                     printf("Ingrese una opcion por favor: \n");
                     fflush(stdin);
@@ -95,7 +111,7 @@ void Menu(eEmployee empleados[])
                     switch(subOpcion)
                     {
                         case 'A':
-                            ordenarEmpleados(empleados, CANTIDAD_EMPLEADOS, 1);
+                            ordenarEmpleados(empleados, CANTIDAD_EMPLEADOS, 0);
                             MostrarEmpleados(empleados, CANTIDAD_EMPLEADOS);
                             AprieteEnter();
                             break;
@@ -186,39 +202,51 @@ int ObtenerEspacioLibre(eEmployee empleados[], int capacidad)
 
 void CargarEmpleado(eEmployee empleados[], int indice, int capacidad)
 {
+    char salarioAux[TAMANIO_ARRAYS];
+    char sectorAux[TAMANIO_ARRAYS];
     int idMaximo;
     int i;
 
-    idMaximo = 0;
-    //Se cargan todos los datos
-    printf("Ingrese nombre\n");
-    fflush(stdin);
-    gets(empleados[indice].name);
-
-    printf("Ingrese apellido por favor\n");
-    fflush(stdin);
-    gets(empleados[indice].lastName);
-
-    printf("Ingrese el salario por favor\n");
-    scanf("%f", &empleados[indice].salary);
-
-    printf("Ingrese el sector por favor\n");
-    scanf("%d", &empleados[indice].sector);
-
-
-    //Se busca cual es el id maximo ya que estan inicializados en 0 si es la primera vez devolvera 0 sino devolvera el ultimo id asignado
-    for(i = 0; i<capacidad; i++)
+    if(indice == -1)
     {
-        if(empleados[i].id > idMaximo)
-        {
-            idMaximo = empleados[i].id;
-        }
+        printf("ERROR NO HAY MAS ESPACIO PARA EMPLEADOS NUEVOS\n");
     }
-    //Al id maximo se le suma uno de esta forma se vuelve al campo id en auto incremental
-    empleados[indice].id = idMaximo + 1;
+    else
+    {
+        idMaximo = 0;
+        //Se cargan todos los datos
+        printf("Ingrese nombre\n");
+        fflush(stdin);
+        gets(empleados[indice].name);
 
-    //Se hace la alta logica del empleado
-    empleados[indice].isEmpty = 1;
+        printf("Ingrese apellido por favor\n");
+        fflush(stdin);
+        gets(empleados[indice].lastName);
+
+        IngresarDatoCadenaCaracteres(salarioAux, "Ingrese el salario por favor\n");
+        empleados[indice].salary = ValidarNumeroFlotante(salarioAux);
+
+
+        IngresarDatoCadenaCaracteres(sectorAux, "Ingrese el sector por favor\n");
+        empleados[indice].sector = ValidarNumeroEntero(sectorAux);
+
+
+
+        //Se busca cual es el id maximo ya que estan inicializados en 0 si es la primera vez devolvera 0 sino devolvera el ultimo id asignado
+        for(i = 0; i<capacidad; i++)
+        {
+            if(empleados[i].id > idMaximo)
+            {
+                idMaximo = empleados[i].id;
+            }
+        }
+        //Al id maximo se le suma uno de esta forma se vuelve al campo id en auto incremental
+        empleados[indice].id = idMaximo + 1;
+
+        //Se hace la alta logica del empleado
+        empleados[indice].isEmpty = 1;
+    }
+
 }
 
 void InicializarId(eEmployee empleados[], int capacidad)
@@ -268,7 +296,7 @@ int BuscarPorId(eEmployee empleados[], int capacidad)
     int flagId;
     int retorno;
 
-    retorno = 0;
+    retorno = -1;
     flagId = 0;
     //Se pide ingresar el id del empleado a buscar
     printf("ingrese el id del empleado a buscar: \n");
@@ -282,7 +310,7 @@ int BuscarPorId(eEmployee empleados[], int capacidad)
         if(idBusqueda == empleados[i].id)
         {
             flagId = 1;
-            retorno = empleados[i].id;
+            retorno = i;
              /*
             Es de observar que la juistificacion esta en negativo ya que en positivo no da el formato deseado, no se sabe el motivo sin embargo funciona
             se supone que justifica en vez de a la derecha hacia la izquierda asi que se toma como solucion
@@ -306,7 +334,7 @@ int BuscarPorId(eEmployee empleados[], int capacidad)
     //En caso de no encontrar coincidencia muestra mensaje de error y se retorna 0
     if(flagId == 0)
     {
-        printf("Error, no existe el id");
+        printf("Error, no existe el id\n");
     }
 
 
@@ -357,28 +385,30 @@ int HardcodearDatos(eEmployee empleados[], int capacidad)
 }
 
 
-int RemoverEmpleado(eEmployee empleados[], int capacidad, int id)
+int RemoverEmpleado(eEmployee empleados[], int capacidad, int indice)
 {
-    int i;
+
     int confirmacion;
     int retorno;
 
     retorno = 0;
 
-    for(i=0; i< capacidad; i++)
+
+
+    confirmacion = IngresarNumeroEntero("Esta seguro que desea borrar al empleado? 1 para si 0 para no");
+    while(confirmacion != 0 &&
+          confirmacion != 1)
     {
-        if(id == empleados[i].id)
-        {
-            confirmacion = IngresarNumeroEntero("Esta seguro que desea borrar al empleado? 1 para si 0 para no");
-            while(confirmacion != 0 &&
-                  confirmacion != 1)
-            {
-                confirmacion = IngresarNumeroEntero("ERROR NUMERO NO VALIDO 1 para si 0 para no");
-            }
-            empleados[i].isEmpty = 0;
-            retorno = 1;
-        }
+        confirmacion = IngresarNumeroEntero("ERROR NUMERO NO VALIDO 1 para si 0 para no");
     }
+
+
+    if(confirmacion == 1)
+    {
+        retorno = 1;
+        empleados[indice].isEmpty = 0;
+    }
+
 
     return retorno;
 }
@@ -401,10 +431,12 @@ int ordenarEmpleados(eEmployee empleados[], int capacidad, int orden)
             if(orden == 0)
             {
                 if(strcmp(empleados[i].name, empleados[j].name) > 0)
-                empleadoAux  = empleados[i];
-                empleados[i] = empleados[j];
-                empleados[j] = empleadoAux;
-                retorno = 1;
+                {
+                    empleadoAux  = empleados[i];
+                    empleados[i] = empleados[j];
+                    empleados[j] = empleadoAux;
+                    retorno = 1;
+                }
             }
             else
             {
@@ -429,7 +461,7 @@ int ordenarEmpleados(eEmployee empleados[], int capacidad, int orden)
 int SacarSalarios(eEmployee empleados[], int capacidad)
 {
     int i;
-    int salarioTotal;
+    float salarioTotal;
     int contadorSalarios;
     float salarioPromedio;
     int banderaPromedio;
@@ -447,11 +479,11 @@ int SacarSalarios(eEmployee empleados[], int capacidad)
         }
     }
 
-    salarioPromedio = (float)salarioTotal/contadorSalarios;
+    salarioPromedio = salarioTotal/contadorSalarios;
 
-    printf("El salario total de los empleados es de %d\n", salarioTotal);
+    printf("El salario total de los empleados es de %.2f\n", salarioTotal);
     printf("El salario promedio de los empleados es de %.2f\n", salarioPromedio);
-    printf("Los empleados que superan el salario minimo son:\n");
+    printf("Los empleados que superan el salario promedio son:\n");
 
 
     printf("Nombre   ");
@@ -483,62 +515,67 @@ int SacarSalarios(eEmployee empleados[], int capacidad)
     return banderaPromedio;
 }
 
-void ModificarEmpleado(eEmployee empleados[], int capacidad, int id)
+void ModificarEmpleado(eEmployee empleados[], int capacidad, int indice)
 {
-    int i;
+
     int opcion;
+    char salarioAux[TAMANIO_ARRAYS];
+    char sectorAux[TAMANIO_ARRAYS];
     char opcionAux[TAMANIO_ARRAYS];
-    for(i=0; i<capacidad; i++)
+
+
+
+
+    printf("Empleado a modificar:  \n");
+    printf("Nombre   ");
+    printf("Apellido  ");
+    printf("id   ");
+    printf("Salario  ");
+    printf("Sector  \n");
+    printf("%-10s", empleados[indice].name);
+    printf("%-10s", empleados[indice].lastName);
+    printf("%-5d", empleados[indice].id);
+    printf("%-10.2f", empleados[indice].salary);
+    printf("%-5d\n", empleados[indice].sector);
+    printf("*****************************************************\n");
+    printf("1_Modificar nombre\n");
+    printf("2_Modificar apellido\n");
+    printf("3_Modificar sueldo\n");
+    printf("4_modificar sector\n");
+
+    //Ingreso la opcion y valido que sea un numero
+    IngresarDatoCadenaCaracteres(opcionAux, "Ingrese una opcion por favor: \n");
+    opcion = ValidarNumeroEntero(opcionAux);
+
+    switch(opcion)
     {
-        if(empleados[i].id == id)
-        {
-            printf("Empleado a modificar:  \n");
-            printf("Nombre   ");
-            printf("Apellido  ");
-            printf("id   ");
-            printf("Salario  ");
-            printf("Sector  \n");
-            printf("%-10s", empleados[i].name);
-            printf("%-10s", empleados[i].lastName);
-            printf("%-5d", empleados[i].id);
-            printf("%-10.2f", empleados[i].salary);
-            printf("%-5d\n", empleados[i].sector);
-            printf("*****************************************************");
-            printf("1_Modificar nombre\n");
-            printf("2_Modificar apellido\n");
-            printf("3_Modificar sueldo\n");
-            printf("4_modificar sector\n");
-
-            //Ingreso la opcion y valido que sea un numero
-            IngresarDatoCadenaCaracteres(opcionAux, "Ingrese una opcion por favor: \n");
-            opcion = ValidarNumeroEntero(opcionAux);
-
-            switch(opcion)
-            {
-                case 1:
-                    printf("Ingrese nombre\n");
-                    fflush(stdin);
-                    gets(empleados[i].name);
-                    break;
-                case 2:
-                    printf("Ingrese apellido por favor\n");
-                    fflush(stdin);
-                    gets(empleados[i].lastName);
-                    break;
-                case 3:
-                    printf("Ingrese el salario por favor\n");
-                    scanf("%f", &empleados[i].salary);
-                    break;
-                case 4:
-                    printf("Ingrese el sector por favor\n");
-                    scanf("%d", &empleados[i].sector);
-                    break;
-            }
-        }
+        case 1:
+            printf("Ingrese nombre\n");
+            fflush(stdin);
+            gets(empleados[indice].name);
+            break;
+        case 2:
+            printf("Ingrese apellido por favor\n");
+            fflush(stdin);
+            gets(empleados[indice].lastName);
+            break;
+        case 3:
+            IngresarDatoCadenaCaracteres(salarioAux, "Ingrese el salario por favor\n");
+            empleados[indice].salary = ValidarNumeroFlotante(salarioAux);
+            break;
+        case 4:
+            IngresarDatoCadenaCaracteres(sectorAux, "Ingrese el sector por favor\n");
+            empleados[indice].sector = ValidarNumeroEntero(sectorAux);
+            break;
+        default:
+            printf("Esa no es una opcion valida, saliendo\n");
+            break;
     }
+
     printf("Modifcaciones realizadas correctamente\n");
     AprieteEnter();
-
-
-
 }
+
+
+
+

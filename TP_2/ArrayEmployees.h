@@ -74,11 +74,11 @@ void MostrarEmpleados(eEmployee[], int );
 
 void InicializarId(eEmployee[], int);
 
-/** \brief Se busca un empleado segun su id, en caso de coincidencia devuelve el id correspondiente, en caso contrario devuelve 0
+/** \brief Se busca un empleado segun su id, en caso de coincidencia devuelve el indice correspondiente, en caso contrario devuelve 0
  *
  * \param eEmployee[]: el array de empleados en el cual se buscara la coincidencia de id
  * \param int: la cantidad de elementos del array de empleados
- * \return el id en caso de coincidencia, 0 en caso de error
+ * \return el indice en caso de coincidencia, -1 en caso de error
  *
  */
 
@@ -96,11 +96,11 @@ int BuscarPorId(eEmployee[], int);
 
 int HardcodearDatos(eEmployee[], int);
 
-/** \brief Da de baja logicamente a un empleado dentro del array de empleados a tra vez de una busqueda por id
+/** \brief Da de baja logicamente a un empleado dentro del array de empleados segun el indice que se le pase
  *
  * \param eEmployee[]: array de empleados en el cual se buscara el empleado a dar de baja
  * \param int capacidad del array
- * \param int id del empleado a ser dado de baja
+ * \param int indice del empleado a ser dado de baja
  * \return devuelve 1 si logro dar de baja al empleado o 0 si no lo logro
  *
  */
@@ -137,7 +137,7 @@ int SacarSalarios(eEmployee empleados[], int capacidad);
  *
  * \param eEmplyee[]: el array de empleados donde se buscara el empleado a modificar
  * \param int: cantidad de elementos del array de empleados
- * \param int: el id del empleado a modificar
+ * \param int: el indice del empleado a modificar
  * \return
  *
  */
